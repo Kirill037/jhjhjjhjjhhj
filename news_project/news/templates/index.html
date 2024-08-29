@@ -1,0 +1,40 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>NewsFlash</title>
+    <link rel="icon" href="{% static 'ico/favicon.ico' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
+</head>
+<body>
+    <header>
+        <h1 class="logo">NEWS</h1>
+    </header>
+    <br />
+
+    <div>
+        {% for item in news_items %}
+        <div class="container">
+            <h2>{{ item.title }} | источник: {{ item.source.name }} | автор: {{ item.author }}</h2>
+            <p>{{ item.description }}</p>
+            <a href="{{ item.url }}">Перейти по ссылке</a>
+            <sub>{{ item.publishedAt }}</sub>
+            <form method="post" action="{% url 'add_favorite' %}">
+                {% csrf_token %}
+                <input type="hidden" name="title" value="{{ item.title }}" />
+                <input type="hidden" name="description" value="{{ item.description }}" />
+                <input type="hidden" name="source" value="{{ item.source.name }}" />
+                <input type="hidden" name="url" value="{{ item.url }}" />
+                <input type="hidden" name="author" value="{{ item.author }}" />
+                <input type="hidden" name="published_at" value="{{ item.publishedAt }}" />
+                <button class="btn-favorite" type="submit">Добавить в избранное</button>
+            </form>
+        </div>
+        {% endfor %}
+    </div>
+
+    <button onclick="topFunction()" id="scrollTopButton">Наверх!</button>
+    <script defer src="{% static 'js/index.js' %}"></script>
+</body>
+</html>
