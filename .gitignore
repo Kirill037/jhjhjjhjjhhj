@@ -2,9 +2,9 @@
 *.log
 *.pot
 *.pyc
-__pycache__
-db.sqlite3
-requirements.txt
+*__pycache__
+*db.sqlite3
+*requirements.txt
 
 # Backup files #
 *.bak
@@ -98,7 +98,7 @@ celerybeat-schedule.*
 *.sage.py
 
 # Environments
-.env
+*.env
 .venv
 env/
 venv/
